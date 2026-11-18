@@ -1,0 +1,1859 @@
+### Updated `index.html`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ICC CricPredict AI — Dark Neon ML Cricket Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-black: #020205;
+      --bg-surface: #08080e;
+      --bg-card: #0c0c14;
+      --bg-card-hover: #12121e;
+      --bg-input: #050509;
+      --neon-cyan: #00f0ff;
+      --neon-green: #00ff88;
+      --neon-gold: #ffe600;
+      --neon-amber: #ff8800;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-sans: 'Outfit', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-sans);
+      background:
+        radial-gradient(circle at 8% 12%, rgba(0, 240, 255, 0.08), transparent 32%),
+        radial-gradient(circle at 92% 14%, rgba(0, 255, 136, 0.07), transparent 35%),
+        radial-gradient(circle at 50% 92%, rgba(255, 230, 0, 0.05), transparent 40%),
+        var(--bg-black);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 240, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 136, 0.025) 1px, transparent 1px);
+      background-size: 44px 44px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px 24px 64px;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 24px;
+      margin-bottom: 26px;
+      background: rgba(8, 8, 14, 0.92);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand { display: flex; align-items: center; gap: 14px; }
+
+    .brand-logo {
+      width: 48px; height: 48px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-green));
+      display: grid; place-items: center; font-weight: 900; font-size: 20px; color: #000000;
+      box-shadow: 0 0 22px rgba(0, 240, 255, 0.55), 0 0 18px rgba(0, 255, 136, 0.35);
+    }
+
+    .brand-title h1 {
+      font-size: 1.55rem; font-weight: 900; letter-spacing: -0.02em;
+      background: linear-gradient(90deg, #ffffff 0%, var(--neon-cyan) 55%, var(--neon-green) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .brand-title p { font-size: 0.82rem; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+
+    .icc-badge {
+      display: inline-flex; align-items: center; gap: 5px; padding: 2px 9px; border-radius: 999px;
+      background: rgba(0, 255, 136, 0.12); border: 1px solid rgba(0, 255, 136, 0.6);
+      color: var(--neon-green); font-weight: 700; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em;
+      box-shadow: 0 0 12px rgba(0, 255, 136, 0.25);
+    }
+
+    .header-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+    .engine-pill {
+      font-family: var(--font-mono); font-size: 0.75rem; padding: 7px 12px; border-radius: 999px;
+      background: rgba(255, 230, 0, 0.1); border: 1px solid rgba(255, 230, 0, 0.5); color: var(--neon-gold);
+      box-shadow: 0 0 14px rgba(255, 230, 0, 0.15);
+    }
+
+    .btn {
+      font-family: var(--font-sans); font-weight: 700; font-size: 0.88rem; border: none; border-radius: 12px;
+      padding: 10px 16px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+      transition: all 0.22s cubic-bezier(0.2, 0.8, 0.2, 1); color: var(--text-main);
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-outline { background: #0b0b12; border: 1px solid rgba(255, 255, 255, 0.2); }
+    .btn-outline:hover { border-color: var(--neon-cyan); box-shadow: 0 0 16px rgba(0, 240, 255, 0.3); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--neon-cyan), #00a2ff); color: #000000;
+      box-shadow: 0 0 22px rgba(0, 240, 255, 0.45);
+    }
+    .btn-primary:hover { box-shadow: 0 0 30px rgba(0, 240, 255, 0.75); }
+
+    .btn-predict {
+      width: 100%; justify-content: center; padding: 14px 20px; font-size: 1rem;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      background: linear-gradient(135deg, var(--neon-green), var(--neon-cyan) 55%, var(--neon-gold));
+      background-size: 200% 200%; color: #000000; font-weight: 900;
+      box-shadow: 0 0 26px rgba(0, 255, 136, 0.4);
+    }
+    .btn-predict:hover {
+      background-position: 100% 50%;
+      box-shadow: 0 0 34px rgba(0, 240, 255, 0.55);
+    }
+
+    .section-header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 16px; }
+    .section-title { display: flex; align-items: center; gap: 10px; font-size: 1.25rem; font-weight: 800; letter-spacing: -0.01em; }
+    .section-accent {
+      width: 5px; height: 24px; border-radius: 4px;
+      background: linear-gradient(180deg, var(--neon-cyan), var(--neon-green));
+      box-shadow: 0 0 12px var(--neon-cyan);
+    }
+
+    .filter-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+    .chip {
+      font-family: var(--font-sans); font-size: 0.82rem; font-weight: 700; padding: 7px 14px; border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.16); background: #0a0a12; color: var(--text-muted);
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .chip:hover { color: var(--text-main); border-color: var(--neon-cyan); box-shadow: 0 0 12px rgba(0, 240, 255, 0.25); }
+    .chip.active {
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-green)); color: #000000;
+      border-color: transparent; box-shadow: 0 0 18px rgba(0, 240, 255, 0.55);
+    }
+
+    .matches-scroller {
+      display: grid; grid-auto-flow: column; grid-auto-columns: minmax(325px, 355px); gap: 16px;
+      overflow-x: auto; padding-bottom: 12px; margin-bottom: 32px; scroll-snap-type: x mandatory;
+    }
+    .matches-scroller::-webkit-scrollbar { height: 8px; }
+    .matches-scroller::-webkit-scrollbar-track { background: #090910; border-radius: 999px; }
+    .matches-scroller::-webkit-scrollbar-thumb { background: linear-gradient(90deg, var(--neon-cyan), var(--neon-green)); border-radius: 999px; }
+
+    .match-card {
+      scroll-snap-align: start;
+      background: linear-gradient(160deg, var(--bg-card), #06060b);
+      border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 18px; padding: 16px 18px;
+      display: flex; flex-direction: column; justify-content: space-between; gap: 11px;
+      transition: all 0.25s ease; position: relative; overflow: hidden;
+    }
+    .match-card::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-gold), var(--neon-green));
+      box-shadow: 0 0 12px var(--neon-cyan);
+    }
+    .match-card:hover {
+      transform: translateY(-4px); border-color: var(--neon-cyan);
+      box-shadow: 0 0 28px rgba(0, 240, 255, 0.24);
+      background: var(--bg-card-hover);
+    }
+
+    .match-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 0.75rem; }
+    .format-tag {
+      font-family: var(--font-mono); font-weight: 700; padding: 3px 8px; border-radius: 6px;
+      background: rgba(0, 240, 255, 0.12); color: var(--neon-cyan); border: 1px solid rgba(0, 240, 255, 0.5);
+    }
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 6px; font-weight: 800; padding: 3px 9px;
+      border-radius: 999px; font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .status-live { background: rgba(255, 136, 0, 0.16); color: #ffaa33; border: 1px solid var(--neon-amber); box-shadow: 0 0 12px rgba(255, 136, 0, 0.35); }
+    .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--neon-amber); box-shadow: 0 0 10px var(--neon-amber); animation: pulse 1.3s infinite; }
+    @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.45); opacity: 0.5; } }
+    .status-recent { background: rgba(0, 255, 136, 0.12); color: var(--neon-green); border: 1px solid rgba(0, 255, 136, 0.5); }
+    .status-upcoming { background: rgba(255, 230, 0, 0.12); color: var(--neon-gold); border: 1px solid rgba(255, 230, 0, 0.5); }
+
+    .series-name { font-size: 0.78rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .teams-stack { display: flex; flex-direction: column; gap: 8px; }
+    .team-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-weight: 700; font-size: 0.98rem; }
+    .team-id { display: flex; align-items: center; gap: 8px; }
+    .team-score { font-family: var(--font-mono); font-size: 0.85rem; color: #e2e8f0; }
+    .match-summary { font-size: 0.78rem; color: var(--neon-cyan); font-weight: 600; min-height: 20px; }
+
+    /* Inline Match Card Prediction Strip */
+    .card-inline-pred {
+      background: rgba(0, 240, 255, 0.05);
+      border: 1px solid rgba(0, 255, 136, 0.45);
+      border-radius: 12px;
+      padding: 10px 12px;
+      animation: fadeUp 0.25s ease;
+    }
+    .card-pred-top {
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; margin-bottom: 6px;
+    }
+    .card-pred-bar {
+      height: 8px; border-radius: 999px; overflow: hidden; display: flex;
+      background: #141422; margin-bottom: 6px;
+    }
+    .card-pred-driver {
+      font-size: 0.7rem; color: var(--text-muted); line-height: 1.3;
+    }
+
+    .match-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 8px; border-top: 1px solid rgba(255, 255, 255, 0.08); }
+    .venue-text { font-size: 0.72rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 145px; }
+    .card-btn-group { display: flex; gap: 6px; align-items: center; }
+
+    .btn-mini {
+      font-size: 0.74rem; padding: 6px 10px; border-radius: 8px;
+      background: rgba(0, 255, 136, 0.14); color: var(--neon-green);
+      border: 1px solid var(--neon-green); font-weight: 800; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-mini:hover { background: var(--neon-green); color: #000000; box-shadow: 0 0 14px var(--neon-green); }
+
+    .btn-mini-ghost {
+      font-size: 0.72rem; padding: 6px 8px; border-radius: 8px;
+      background: rgba(0, 240, 255, 0.08); color: var(--neon-cyan);
+      border: 1px solid rgba(0, 240, 255, 0.35); font-weight: 700; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-mini-ghost:hover { background: var(--neon-cyan); color: #000000; }
+
+    .dashboard-grid { display: grid; grid-template-columns: 1.18fr 0.82fr; gap: 24px; align-items: start; }
+    @media (max-width: 1080px) { .dashboard-grid { grid-template-columns: 1fr; } }
+
+    .panel {
+      background: linear-gradient(170deg, rgba(12, 12, 20, 0.96), rgba(5, 5, 9, 0.98));
+      border: 1px solid rgba(0, 240, 255, 0.22); border-radius: 22px; padding: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85), 0 0 28px rgba(0, 240, 255, 0.06);
+      backdrop-filter: blur(10px);
+    }
+
+    .playground-toolbar {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 10px; margin-bottom: 16px; padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .toggle-label {
+      display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+      font-size: 0.8rem; font-weight: 700; color: var(--neon-green);
+    }
+    .toggle-label input { accent-color: var(--neon-green); width: 16px; height: 16px; cursor: pointer; }
+
+    .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 16px; }
+    .form-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+    @media (max-width: 640px) {
+      .form-grid, .form-grid-3 { grid-template-columns: 1fr; }
+    }
+
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    .field label {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+      color: var(--text-muted); display: flex; justify-content: space-between; align-items: center;
+    }
+    .field label span.val-pill {
+      font-family: var(--font-mono); color: var(--neon-cyan); font-size: 0.74rem;
+    }
+    .field input, .field select {
+      font-family: var(--font-sans); font-size: 0.9rem; font-weight: 600; color: var(--text-main);
+      background: var(--bg-input); border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 10px; padding: 9px 11px; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .field input:focus, .field select:focus { border-color: var(--neon-cyan); box-shadow: 0 0 14px rgba(0, 240, 255, 0.28); }
+
+    .field input[type="range"] {
+      padding: 0; height: 8px; border-radius: 999px; background: #141422;
+      accent-color: var(--neon-cyan); border: none; margin: 8px 0; cursor: pointer;
+    }
+
+    .team-pair-row {
+      display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: end; margin-bottom: 14px;
+    }
+    @media (max-width: 560px) {
+      .team-pair-row { grid-template-columns: 1fr; }
+    }
+
+    .swap-btn {
+      height: 40px; padding: 0 12px; border-radius: 10px; background: #0a0a14;
+      border: 1px solid rgba(0, 240, 255, 0.4); color: var(--neon-cyan); font-weight: 800; cursor: pointer;
+    }
+    .swap-btn:hover { background: var(--neon-cyan); color: #000000; }
+
+    .sub-box {
+      background: rgba(0, 240, 255, 0.03);
+      border: 1px dashed rgba(0, 240, 255, 0.35);
+      border-radius: 14px; padding: 14px; margin-bottom: 16px;
+    }
+    .sub-box.green-box {
+      background: rgba(0, 255, 136, 0.03);
+      border-color: rgba(0, 255, 136, 0.35);
+    }
+    .sub-box-title {
+      font-size: 0.78rem; font-weight: 800; color: var(--neon-cyan); text-transform: uppercase;
+      letter-spacing: 0.06em; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;
+    }
+    .sub-box.green-box .sub-box-title { color: var(--neon-green); }
+    .live-metrics-preview { font-family: var(--font-mono); font-size: 0.74rem; color: var(--neon-gold); }
+
+    .prediction-result {
+      margin-top: 20px; padding: 22px; border-radius: 18px;
+      background: linear-gradient(145deg, #06060b, #0c0c16);
+      border: 1px solid rgba(0, 255, 136, 0.45);
+      box-shadow: 0 0 28px rgba(0, 255, 136, 0.12);
+      animation: fadeUp 0.3s ease;
+    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    .pred-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
+    .confidence-badge { padding: 5px 12px; border-radius: 999px; font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; }
+    .conf-high { background: rgba(0, 255, 136, 0.14); color: var(--neon-green); border: 1px solid var(--neon-green); box-shadow: 0 0 12px rgba(0, 255, 136, 0.3); }
+    .conf-medium { background: rgba(255, 230, 0, 0.14); color: var(--neon-gold); border: 1px solid var(--neon-gold); }
+    .conf-low { background: rgba(255, 136, 0, 0.14); color: #ffaa33; border: 1px solid var(--neon-amber); }
+
+    .prob-scoreboard { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; gap: 12px; }
+    .prob-team { display: flex; flex-direction: column; }
+    .prob-team.right { text-align: right; }
+    .prob-team-name { font-size: 0.92rem; font-weight: 700; color: var(--text-muted); }
+    .prob-pct { font-family: var(--font-mono); font-size: 2.15rem; font-weight: 900; line-height: 1.1; }
+    .prob-pct.team-a { color: var(--neon-green); text-shadow: 0 0 20px rgba(0, 255, 136, 0.55); }
+    .prob-pct.team-b { color: var(--neon-cyan); text-shadow: 0 0 20px rgba(0, 240, 255, 0.55); }
+
+    .split-bar-wrap { height: 18px; border-radius: 999px; overflow: hidden; display: flex; background: #141422; border: 1px solid rgba(255, 255, 255, 0.18); margin-bottom: 20px; }
+    .split-bar-a { background: linear-gradient(90deg, #00cc6a, var(--neon-green)); box-shadow: 0 0 14px var(--neon-green); transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+    .split-bar-b { background: linear-gradient(90deg, #0099cc, var(--neon-cyan)); box-shadow: 0 0 14px var(--neon-cyan); transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+
+    .feature-importance-box { margin-bottom: 18px; padding: 14px; border-radius: 14px; background: rgba(255, 255, 255, 0.025); border: 1px solid rgba(255, 255, 255, 0.09); }
+    .fi-title { font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--neon-gold); margin-bottom: 10px; }
+    .fi-row { display: grid; grid-template-columns: 155px 1fr 78px; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 0.78rem; }
+    @media (max-width: 520px) { .fi-row { grid-template-columns: 120px 1fr 68px; font-size: 0.72rem; } }
+    .fi-bar-bg { height: 8px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); overflow: hidden; }
+    .fi-bar-fill { height: 100%; border-radius: 999px; transition: width 0.4s ease; }
+
+    .reasons-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .reasons-list li { font-size: 0.88rem; color: #e2e8f0; padding: 9px 12px; border-radius: 10px; background: rgba(0, 240, 255, 0.05); border-left: 3px solid var(--neon-cyan); }
+
+    .search-row { display: flex; gap: 10px; margin-bottom: 12px; }
+    .search-row input {
+      flex: 1; font-family: var(--font-sans); font-size: 0.95rem; font-weight: 600; color: var(--text-main);
+      background: var(--bg-input); border: 1px solid rgba(0, 240, 255, 0.35); border-radius: 12px; padding: 11px 14px; outline: none;
+    }
+    .search-row input:focus { border-color: var(--neon-green); box-shadow: 0 0 18px rgba(0, 255, 136, 0.35); }
+
+    .quick-players { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+
+    .trading-card {
+      position: relative; border-radius: 20px; padding: 20px;
+      background:
+        radial-gradient(circle at 88% 12%, rgba(0, 255, 136, 0.14), transparent 42%),
+        radial-gradient(circle at 12% 88%, rgba(0, 240, 255, 0.14), transparent 44%),
+        linear-gradient(155deg, #0e0e18 0%, #050508 100%);
+      border: 1px solid rgba(0, 240, 255, 0.45);
+      box-shadow: 0 0 32px rgba(0, 240, 255, 0.16), 0 0 24px rgba(0, 255, 136, 0.1);
+    }
+
+    .card-top { display: flex; gap: 16px; align-items: center; margin-bottom: 18px; }
+
+    .avatar-frame {
+      width: 104px; height: 120px; border-radius: 16px; overflow: hidden; flex-shrink: 0;
+      border: 2px solid var(--neon-gold); background: #07070d;
+      box-shadow: 0 0 22px rgba(255, 230, 0, 0.32); display: flex; align-items: center; justify-content: center;
+    }
+    .avatar-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+
+    .player-identity h3 { font-size: 1.42rem; font-weight: 900; line-height: 1.15; margin-bottom: 6px; }
+    .player-country { font-size: 0.9rem; font-weight: 700; color: var(--neon-cyan); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+    .player-style-line { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; }
+
+    .mini-tag { font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 999px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.18); color: #e2e8f0; }
+    .mini-tag.gold { background: rgba(255, 230, 0, 0.12); border-color: rgba(255, 230, 0, 0.55); color: var(--neon-gold); }
+
+    .stat-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+    .stat-tab {
+      font-family: var(--font-mono); font-weight: 700; font-size: 0.82rem; padding: 9px; border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.15); background: #07070c; color: var(--text-muted); cursor: pointer; transition: all 0.2s;
+    }
+    .stat-tab.active {
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-green)); color: #000000;
+      border-color: transparent; box-shadow: 0 0 20px rgba(0, 240, 255, 0.45);
+    }
+
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+    .stat-box { background: #050509; border: 1px solid rgba(0, 240, 255, 0.18); border-radius: 12px; padding: 10px 12px; text-align: center; }
+    .stat-val { font-family: var(--font-mono); font-size: 1.15rem; font-weight: 800; color: var(--neon-green); text-shadow: 0 0 10px rgba(0, 255, 136, 0.35); }
+    .stat-lbl { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.04em; }
+
+    .recent-form-strip { background: #06060b; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 12px; }
+    .recent-form-strip h4 { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--neon-cyan); margin-bottom: 8px; }
+    .form-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .form-pill { font-family: var(--font-mono); font-size: 0.74rem; padding: 4px 9px; border-radius: 8px; background: rgba(0, 240, 255, 0.06); border: 1px solid rgba(0, 240, 255, 0.22); }
+
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
+    .modal-backdrop.open { display: flex; }
+    .modal { width: 100%; max-width: 500px; background: #0a0a12; border: 1px solid var(--neon-cyan); border-radius: 20px; padding: 24px; box-shadow: 0 0 40px rgba(0, 240, 255, 0.25); }
+    .modal h2 { font-size: 1.25rem; margin-bottom: 8px; }
+    .modal p { font-size: 0.84rem; color: var(--text-muted); margin-bottom: 16px; }
+
+    .spinner { width: 16px; height: 16px; border: 2.5px solid rgba(255, 255, 255, 0.3); border-top-color: currentColor; border-radius: 50%; animation: spin 0.7s linear infinite; display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .toast {
+      position: fixed; bottom: 24px; right: 24px; background: #090910; border: 1px solid var(--neon-cyan);
+      color: var(--text-main); padding: 12px 18px; border-radius: 12px; font-size: 0.86rem; font-weight: 600;
+      box-shadow: 0 0 24px rgba(0, 240, 255, 0.35); z-index: 200; opacity: 0; transform: translateY(12px); pointer-events: none; transition: all 0.25s ease;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="brand-logo">⚡</div>
+        <div class="brand-title">
+          <h1>ICC CricPredict AI</h1>
+          <p>
+            <span class="icc-badge">● Official ICC Only</span>
+            <span>Tests • ODIs • T20Is • WTC • World Cups</span>
+          </p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <span class="engine-pill" id="engineStatusPill">ML Engine: XGBoost Simulation</span>
+        <button class="btn btn-outline" id="openSettingsBtn">⚙ API Settings</button>
+        <button class="btn btn-primary" id="refreshMatchesBtn">↻ Sync Live ICC Feed</button>
+      </div>
+    </header>
+
+    <!-- Feature 1: Match Feed with Inline Predict % -->
+    <section>
+      <div class="section-header">
+        <div class="section-title">
+          <span class="section-accent"></span>
+          <span>Live, Recent & Upcoming ICC Matches</span>
+        </div>
+        <div class="filter-bar" id="formatFilterBar">
+          <button class="chip active" data-format="ALL">All Formats</button>
+          <button class="chip" data-format="T20I">T20I</button>
+          <button class="chip" data-format="ODI">ODI</button>
+          <button class="chip" data-format="TEST">Test</button>
+        </div>
+      </div>
+      <div class="matches-scroller" id="matchesFeed"></div>
+    </section>
+
+    <div class="dashboard-grid">
+      <!-- Feature 2: User's Custom AI Match Predictor Playground -->
+      <section class="panel">
+        <div class="section-header" style="margin-bottom: 10px;">
+          <div class="section-title">
+            <span class="section-accent"></span>
+            <span>AI Match Predictor Playground</span>
+          </div>
+          <span class="mini-tag gold">Full Manual Sandbox</span>
+        </div>
+
+        <div class="playground-toolbar">
+          <label class="toggle-label">
+            <input type="checkbox" id="autoSimulateToggle" checked />
+            <span>Live Auto-Simulate on Input Change</span>
+          </label>
+          <button class="btn btn-outline" id="resetPlaygroundBtn" style="padding: 6px 12px; font-size: 0.78rem;">↺ Reset Playground</button>
+        </div>
+
+        <div class="team-pair-row">
+          <div class="field">
+            <label for="teamAInput">Team A</label>
+            <input id="teamAInput" type="text" value="India" list="iccNations" />
+          </div>
+          <button class="swap-btn" id="swapTeamsBtn" title="Swap Team A & Team B">⇄</button>
+          <div class="field">
+            <label for="teamBInput">Team B</label>
+            <input id="teamBInput" type="text" value="Australia" list="iccNations" />
+          </div>
+        </div>
+
+        <div class="form-grid-3">
+          <div class="field">
+            <label for="formatInput">ICC Format</label>
+            <select id="formatInput">
+              <option value="ODI">ODI (50 Overs)</option>
+              <option value="T20I">T20I (20 Overs)</option>
+              <option value="TEST">Test (WTC)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="venueInput">Venue / Stadium</label>
+            <input id="venueInput" type="text" value="Melbourne Cricket Ground (MCG)" />
+          </div>
+          <div class="field">
+            <label for="inningsInput">Innings</label>
+            <select id="inningsInput">
+              <option value="2">2nd Innings (Chase)</option>
+              <option value="1">1st Innings</option>
+              <option value="3">Test 3rd / 4th Innings</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- H2H (20%) & Form (25%) Manual Controls -->
+        <div class="sub-box green-box">
+          <div class="sub-box-title">
+            <span>H2H (20%) & Recent 5-Match ICC Form (25%)</span>
+          </div>
+          <div class="form-grid-3" style="margin-bottom: 0;">
+            <div class="field">
+              <label for="h2hSlider">H2H Edge <span class="val-pill" id="h2hLabel">Balanced (0)</span></label>
+              <input id="h2hSlider" type="range" min="-10" max="10" step="1" value="2" />
+            </div>
+            <div class="field">
+              <label for="formAInput">Team A Last 5 Wins <span class="val-pill" id="formALabel">4 / 5</span></label>
+              <input id="formAInput" type="range" min="0" max="5" step="1" value="4" />
+            </div>
+            <div class="field">
+              <label for="formBInput">Team B Last 5 Wins <span class="val-pill" id="formBLabel">3 / 5</span></label>
+              <input id="formBInput" type="range" min="0" max="5" step="1" value="3" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Pitch, Weather & Toss (20%) -->
+        <div class="form-grid" style="margin-bottom: 14px;">
+          <div class="field">
+            <label for="pitchInput">Pitch Type (20% Weight)</label>
+            <select id="pitchInput">
+              <option value="Balanced Sporting Track">Balanced Sporting Track</option>
+              <option value="Flat Batting Deck">Flat Batting Deck</option>
+              <option value="Pace & Bounce (Seam Friendly)">Pace & Bounce (Seam Friendly)</option>
+              <option value="Dry & Spin Friendly">Dry & Spin Friendly</option>
+              <option value="Slow / Two-Paced Surface">Slow / Two-Paced Surface</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="weatherInput">Weather / Dew Factor</label>
+            <select id="weatherInput">
+              <option value="NEUTRAL">Clear / Neutral Conditions</option>
+              <option value="DEW">Heavy Dew (Chasing Advantage)</option>
+              <option value="OVERCAST">Overcast Skies (Swing / Seam Help)</option>
+              <option value="WORN">Day 4–5 Worn Pitch (Spin / Uneven)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="tossWinnerSelect">Toss Winner</label>
+            <select id="tossWinnerSelect">
+              <option value="A">Team A Won Toss</option>
+              <option value="B">Team B Won Toss</option>
+              <option value="PENDING">Toss Pending</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="tossDecisionSelect">Toss Decision</label>
+            <select id="tossDecisionSelect">
+              <option value="BOWL">Chose to Bowl / Chase</option>
+              <option value="BAT">Chose to Bat First</option>
+              <option value="PENDING">Pending</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Live Match State Counter (35%) -->
+        <div class="sub-box">
+          <div class="sub-box-title">
+            <span>Live Match Counter (35% Model Weight)</span>
+            <span class="live-metrics-preview" id="liveMetricsPreview">CRR: 6.13 | RRR: 6.84 | Wkts: 7</span>
+          </div>
+          <div class="form-grid-3" style="margin-bottom: 10px;">
+            <div class="field">
+              <label for="battingTeamSelect">Currently Batting</label>
+              <select id="battingTeamSelect">
+                <option value="A">Team A</option>
+                <option value="B">Team B</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="phaseSelect">Match Phase</label>
+              <select id="phaseSelect">
+                <option value="LIVE_MIDDLE">Middle Overs / Day 2-3</option>
+                <option value="PRE_MATCH">Pre-Match (0.0 ov)</option>
+                <option value="POWERPLAY">Powerplay / New Ball</option>
+                <option value="DEATH">Death Overs / Final Chase</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="momentumSelect">Live Momentum</label>
+              <select id="momentumSelect">
+                <option value="0">Normal Tempo</option>
+                <option value="1">Surging / Set Batters (+)</option>
+                <option value="-1">Wicket Collapse / Pressure (-)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grid-3" style="margin-bottom: 0;">
+            <div class="field">
+              <label for="runsInput">Current Runs</label>
+              <input id="runsInput" type="number" min="0" value="184" />
+            </div>
+            <div class="field">
+              <label for="wicketsInput">Wickets Lost (0–10)</label>
+              <input id="wicketsInput" type="number" min="0" max="10" value="3" />
+            </div>
+            <div class="field">
+              <label for="oversInput">Overs Bowled</label>
+              <input id="oversInput" type="number" min="0" step="0.1" value="30.0" />
+            </div>
+            <div class="field">
+              <label for="targetInput">Target / 1st Inn Score</label>
+              <input id="targetInput" type="number" min="0" value="321" placeholder="0 if batting 1st" />
+            </div>
+            <div class="field">
+              <label for="partnershipInput">Current Partnership</label>
+              <input id="partnershipInput" type="number" min="0" value="62" />
+            </div>
+            <div class="field">
+              <label for="maxOversInput">Match Overs Limit</label>
+              <input id="maxOversInput" type="number" min="1" max="450" value="50" />
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-predict" id="runPredictionBtn">⚡ Run AI Prediction</button>
+        <div class="prediction-result" id="predictionOutput"></div>
+      </section>
+
+      <!-- Feature 3: ICC Player Stats & Photo Lookup -->
+      <section class="panel">
+        <div class="section-header">
+          <div class="section-title">
+            <span class="section-accent"></span>
+            <span>ICC Player Stats & Photo Lookup</span>
+          </div>
+        </div>
+
+        <div class="search-row">
+          <input id="playerSearchInput" type="text" placeholder="Search ANY cricketer (e.g. Rohit Sharma, KL Rahul, MS Dhoni, Steve Smith)..." />
+          <button class="btn btn-primary" id="playerSearchBtn">Lookup</button>
+        </div>
+
+        <div class="quick-players">
+          <button class="chip active" data-player="Jasprit Bumrah">Jasprit Bumrah</button>
+          <button class="chip" data-player="Virat Kohli">Virat Kohli</button>
+          <button class="chip" data-player="Rohit Sharma">Rohit Sharma</button>
+          <button class="chip" data-player="Travis Head">Travis Head</button>
+          <button class="chip" data-player="Pat Cummins">Pat Cummins</button>
+          <button class="chip" data-player="Joe Root">Joe Root</button>
+          <button class="chip" data-player="Babar Azam">Babar Azam</button>
+          <button class="chip" data-player="Rashid Khan">Rashid Khan</button>
+        </div>
+
+        <div id="playerCardContainer"></div>
+      </section>
+    </div>
+  </div>
+
+  <datalist id="iccNations">
+    <option value="India"></option>
+    <option value="Australia"></option>
+    <option value="England"></option>
+    <option value="New Zealand"></option>
+    <option value="South Africa"></option>
+    <option value="Pakistan"></option>
+    <option value="Sri Lanka"></option>
+    <option value="Bangladesh"></option>
+    <option value="Afghanistan"></option>
+    <option value="West Indies"></option>
+    <option value="Zimbabwe"></option>
+    <option value="Ireland"></option>
+  </datalist>
+
+  <div class="modal-backdrop" id="settingsModal">
+    <div class="modal">
+      <h2>Live AI & Grounding Settings</h2>
+      <p>
+        Optional: Add your <strong>Gemini API Key</strong> for Google Search-grounded live ICC scores & AI predictions. Without a key, the full XGBoost ML simulator & Wikipedia cricketer stats work offline/client-side.
+      </p>
+      <div class="form-grid" style="grid-template-columns: 1fr;">
+        <div class="field">
+          <label for="geminiKeyInput">Gemini API Key (gemini-2.5-flash + Google Search)</label>
+          <input id="geminiKeyInput" type="password" placeholder="AIza..." />
+        </div>
+        <div class="field">
+          <label for="cricApiKeyInput">CricAPI Key (Optional ICC Live Feed)</label>
+          <input id="cricApiKeyInput" type="password" placeholder="Optional CricAPI key..." />
+        </div>
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:12px;">
+        <button class="btn btn-outline" id="closeSettingsBtn">Cancel</button>
+        <button class="btn btn-primary" id="saveSettingsBtn">Save & Activate</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const TEAM_META = {
+      "India": { code: "IND", flag: "🇮🇳", ratings: { TEST: 91, ODI: 95, T20I: 94 }, form5: 4 },
+      "Australia": { code: "AUS", flag: "🇦🇺", ratings: { TEST: 93, ODI: 91, T20I: 89 }, form5: 3 },
+      "England": { code: "ENG", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", ratings: { TEST: 86, ODI: 87, T20I: 88 }, form5: 3 },
+      "New Zealand": { code: "NZ", flag: "🇳🇿", ratings: { TEST: 87, ODI: 85, T20I: 84 }, form5: 3 },
+      "South Africa": { code: "SA", flag: "🇿🇦", ratings: { TEST: 88, ODI: 86, T20I: 85 }, form5: 4 },
+      "Pakistan": { code: "PAK", flag: "🇵🇰", ratings: { TEST: 80, ODI: 82, T20I: 81 }, form5: 3 },
+      "Sri Lanka": { code: "SL", flag: "🇱🇰", ratings: { TEST: 79, ODI: 80, T20I: 79 }, form5: 3 },
+      "Bangladesh": { code: "BAN", flag: "🇧🇩", ratings: { TEST: 73, ODI: 75, T20I: 74 }, form5: 2 },
+      "Afghanistan": { code: "AFG", flag: "🇦🇫", ratings: { TEST: 68, ODI: 81, T20I: 84 }, form5: 4 },
+      "West Indies": { code: "WI", flag: "🌴", ratings: { TEST: 71, ODI: 74, T20I: 82 }, form5: 2 },
+      "Zimbabwe": { code: "ZIM", flag: "🇿🇼", ratings: { TEST: 65, ODI: 67, T20I: 69 }, form5: 2 },
+      "Ireland": { code: "IRE", flag: "🇮🇪", ratings: { TEST: 64, ODI: 70, T20I: 73 }, form5: 2 }
+    };
+
+    const COUNTRY_FLAGS = {
+      "india": "🇮🇳", "australia": "🇦🇺", "england": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "new zealand": "🇳🇿",
+      "south africa": "🇿🇦", "pakistan": "🇵🇰", "sri lanka": "🇱🇰", "bangladesh": "🇧🇩",
+      "afghanistan": "🇦🇫", "west indies": "🌴", "zimbabwe": "🇿🇼", "ireland": "🇮🇪",
+      "scotland": "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "netherlands": "🇳🇱", "nepal": "🇳🇵", "usa": "🇺🇸", "uae": "🇦🇪"
+    };
+
+    const INITIAL_ICC_MATCHES = [
+      {
+        id: "sa-ban-1test", format: "TEST", status: "LIVE",
+        series: "ICC World Test Championship • 1st Test",
+        venue: "The Wanderers Stadium, Johannesburg", pitch: "Pace & Bounce (Seam Friendly)",
+        weather: "OVERCAST", tossWinner: "B", tossDecision: "BAT",
+        teamA: "South Africa", teamB: "Bangladesh",
+        scoreA: "294/4 (63.4 ov)", scoreB: "400 (101.2 ov)",
+        summary: "Day 3 • South Africa trail by 106 runs",
+        liveState: { innings: "2", batting: "A", phase: "LIVE_MIDDLE", runs: 294, wickets: 4, overs: 63.4, target: 401, maxOvers: 90, partnership: 88, momentum: 1 }
+      },
+      {
+        id: "pak-sl-2test", format: "TEST", status: "LIVE",
+        series: "ICC World Test Championship • 2nd Test",
+        venue: "Rawalpindi Cricket Stadium, Rawalpindi", pitch: "Balanced Sporting Track",
+        weather: "NEUTRAL", tossWinner: "A", tossDecision: "BAT",
+        teamA: "Pakistan", teamB: "Sri Lanka",
+        scoreA: "325 (87.5 ov)", scoreB: "98 & 74/3 (22.0 ov)",
+        summary: "Stumps Day 2 • Sri Lanka trail by 153 runs",
+        liveState: { innings: "3", batting: "B", phase: "LIVE_MIDDLE", runs: 74, wickets: 3, overs: 22.0, target: 227, maxOvers: 90, partnership: 24, momentum: -1 }
+      },
+      {
+        id: "nz-ind-1test", format: "TEST", status: "UPCOMING",
+        series: "ICC World Test Championship • 1st Test",
+        venue: "Cello Basin Reserve, Wellington", pitch: "Pace & Bounce (Seam Friendly)",
+        weather: "OVERCAST", tossWinner: "PENDING", tossDecision: "PENDING",
+        teamA: "New Zealand", teamB: "India",
+        scoreA: "Match starts Nov 19", scoreB: "03:30 IST",
+        summary: "WTC 2025–27 Crucial Away Series Opener",
+        liveState: { innings: "1", batting: "A", phase: "PRE_MATCH", runs: 0, wickets: 0, overs: 0, target: 0, maxOvers: 90, partnership: 0, momentum: 0 }
+      },
+      {
+        id: "aus-eng-1t20i", format: "T20I", status: "UPCOMING",
+        series: "England Tour of Australia • 1st T20I",
+        venue: "Melbourne Cricket Ground (MCG), Melbourne", pitch: "Flat Batting Deck",
+        weather: "DEW", tossWinner: "PENDING", tossDecision: "PENDING",
+        teamA: "Australia", teamB: "England",
+        scoreA: "Starts Nov 21", scoreB: "13:45 IST",
+        summary: "5-Match Bilateral T20I Series Opener",
+        liveState: { innings: "1", batting: "A", phase: "PRE_MATCH", runs: 0, wickets: 0, overs: 0, target: 0, maxOvers: 20, partnership: 0, momentum: 0 }
+      },
+      {
+        id: "nz-ind-5odi", format: "ODI", status: "RECENT",
+        series: "India Tour of New Zealand • 5th ODI",
+        venue: "Bay Oval, Mount Maunganui", pitch: "Balanced Sporting Track",
+        weather: "NEUTRAL", tossWinner: "B", tossDecision: "BOWL",
+        teamA: "India", teamB: "New Zealand",
+        scoreA: "209 (42.1 ov)", scoreB: "187 (48.1 ov)",
+        summary: "India won by 22 runs (Clinched series 3-1)",
+        liveState: { innings: "2", batting: "B", phase: "DEATH", runs: 187, wickets: 10, overs: 48.1, target: 210, maxOvers: 50, partnership: 12, momentum: -1 }
+      },
+      {
+        id: "aus-eng-2odi", format: "ODI", status: "RECENT",
+        series: "England Tour of Australia • 2nd ODI",
+        venue: "Adelaide Oval, Adelaide", pitch: "Flat Batting Deck",
+        weather: "NEUTRAL", tossWinner: "B", tossDecision: "BOWL",
+        teamA: "England", teamB: "Australia",
+        scoreA: "355/6 (50.0 ov)", scoreB: "220 (44.3 ov)",
+        summary: "England won by 135 runs • T. Banton 121(99)",
+        liveState: { innings: "2", batting: "B", phase: "DEATH", runs: 220, wickets: 10, overs: 44.3, target: 356, maxOvers: 50, partnership: 8, momentum: -1 }
+      }
+    ];
+
+    const PLAYER_DB = {
+      "jasprit bumrah": {
+        name: "Jasprit Bumrah", wikiTitle: "Jasprit_Bumrah", country: "India", flag: "🇮🇳",
+        role: "Fast Bowler", style: "Right-arm Fast • Right-hand Bat",
+        image: "https://upload.wikimedia.org/wikipedia/commons/0/02/Jasprit_Bumrah_in_PMO_New_Delhi.jpg",
+        stats: {
+          TEST: { matches: 52, primaryLabel: "Wickets", primary: "234", avgLabel: "Bowl Avg", avg: "19.79", rateLabel: "Economy", rate: "2.77", extra1Label: "Best", extra1: "6/27", extra2Label: "5W Hauls", extra2: "16" },
+          ODI: { matches: 91, primaryLabel: "Wickets", primary: "151", avgLabel: "Bowl Avg", avg: "23.74", rateLabel: "Economy", rate: "4.58", extra1Label: "Best", extra1: "6/19", extra2Label: "5W Hauls", extra2: "2" },
+          T20I: { matches: 96, primaryLabel: "Wickets", primary: "122", avgLabel: "Bowl Avg", avg: "18.14", rateLabel: "Economy", rate: "6.52", extra1Label: "Best", extra1: "4/15", extra2Label: "4W Hauls", extra2: "1" }
+        },
+        recentForm: ["1/16 vs AFG (T20I)", "1/25 vs AFG (T20I)", "1/26 vs AFG (T20I)", "1/45 vs ENG (ODI)", "1/31 vs ENG (ODI)"]
+      },
+      "virat kohli": {
+        name: "Virat Kohli", wikiTitle: "Virat_Kohli", country: "India", flag: "🇮🇳",
+        role: "Top-Order Batter", style: "Right-hand Bat • Right-arm Medium",
+        image: "https://upload.wikimedia.org/wikipedia/commons/1/15/Virat_Kohli_portrait.jpg",
+        stats: {
+          TEST: { matches: 123, primaryLabel: "Runs", primary: "9,230", avgLabel: "Bat Avg", avg: "46.85", rateLabel: "Strike Rate", rate: "55.58", extra1Label: "High Score", extra1: "254*", extra2Label: "100s / 50s", extra2: "30 / 31" },
+          ODI: { matches: 320, primaryLabel: "Runs", primary: "15,190", avgLabel: "Bat Avg", avg: "58.42", rateLabel: "Strike Rate", rate: "94.51", extra1Label: "High Score", extra1: "183", extra2Label: "100s / 50s", extra2: "55 / 80" },
+          T20I: { matches: 125, primaryLabel: "Runs", primary: "4,188", avgLabel: "Bat Avg", avg: "48.69", rateLabel: "Strike Rate", rate: "137.04", extra1Label: "High Score", extra1: "122*", extra2Label: "100s / 50s", extra2: "1 / 38" }
+        },
+        recentForm: ["5 vs NZ (ODI)", "0 vs NZ (ODI)", "7 vs NZ (ODI)", "74 vs NZ (ODI)", "139* vs WI (ODI)"]
+      },
+      "rohit sharma": {
+        name: "Rohit Sharma", wikiTitle: "Rohit_Sharma", country: "India", flag: "🇮🇳",
+        role: "Top-Order Batter", style: "Right-hand Bat • Right-arm Off-break",
+        image: "https://upload.wikimedia.org/wikipedia/commons/1/1e/Prime_Minister_Of_Bharat_Shri_Narendra_Damodardas_Modi_with_Shri_Rohit_Gurunath_Sharma_%28Cropped%29.jpg",
+        stats: {
+          TEST: { matches: 67, primaryLabel: "Runs", primary: "4,301", avgLabel: "Bat Avg", avg: "40.57", rateLabel: "Strike Rate", rate: "57.05", extra1Label: "High Score", extra1: "212", extra2Label: "100s / 50s", extra2: "12 / 18" },
+          ODI: { matches: 291, primaryLabel: "Runs", primary: "12,120", avgLabel: "Bat Avg", avg: "49.26", rateLabel: "Strike Rate", rate: "93.04", extra1Label: "High Score", extra1: "264", extra2Label: "100s / 50s", extra2: "35 / 63" },
+          T20I: { matches: 159, primaryLabel: "Runs", primary: "4,231", avgLabel: "Bat Avg", avg: "32.05", rateLabel: "Strike Rate", rate: "140.89", extra1Label: "High Score", extra1: "121*", extra2Label: "100s / 50s", extra2: "5 / 32" }
+        },
+        recentForm: ["2025 Champions Trophy Winner", "138 vs ENG at Lord's (ODI)", "52 International Centuries", "Record 369+ ODI Sixes"]
+      },
+      "travis head": {
+        name: "Travis Head", wikiTitle: "Travis_Head", country: "Australia", flag: "🇦🇺",
+        role: "Attacking Batter", style: "Left-hand Bat • Right-arm Off-break",
+        image: "https://upload.wikimedia.org/wikipedia/commons/b/b8/RSA_vs_AUS_Day_3-Travis_Head-1.jpg",
+        stats: {
+          TEST: { matches: 70, primaryLabel: "Runs", primary: "4,863", avgLabel: "Bat Avg", avg: "42.65", rateLabel: "Strike Rate", rate: "69.44", extra1Label: "High Score", extra1: "175", extra2Label: "100s / 50s", extra2: "13 / 20" },
+          ODI: { matches: 87, primaryLabel: "Runs", primary: "3,280", avgLabel: "Bat Avg", avg: "42.05", rateLabel: "Strike Rate", rate: "106.46", extra1Label: "High Score", extra1: "154*", extra2Label: "100s / 50s", extra2: "8 / 18" },
+          T20I: { matches: 53, primaryLabel: "Runs", primary: "1,335", avgLabel: "Bat Avg", avg: "28.40", rateLabel: "Strike Rate", rate: "156.69", extra1Label: "High Score", extra1: "91", extra2Label: "100s / 50s", extra2: "0 / 6" }
+        },
+        recentForm: ["7 vs ENG (ODI)", "24 vs SA (ODI)", "84 vs SA (ODI)", "36 vs SA (ODI)", "112 vs ZIM (ODI)"]
+      },
+      "pat cummins": {
+        name: "Pat Cummins", wikiTitle: "Pat_Cummins", country: "Australia", flag: "🇦🇺",
+        role: "Fast Bowler", style: "Right-arm Fast • Right-hand Bat",
+        image: "https://upload.wikimedia.org/wikipedia/commons/1/15/RSA_vs_AUS_Day_1-47_%28cropped%29.jpg",
+        stats: {
+          TEST: { matches: 77, primaryLabel: "Wickets", primary: "328", avgLabel: "Bowl Avg", avg: "22.51", rateLabel: "Runs", rate: "1,681", extra1Label: "Best", extra1: "6/23", extra2Label: "5W / 10W", extra2: "14 / 2" },
+          ODI: { matches: 91, primaryLabel: "Wickets", primary: "143", avgLabel: "Bowl Avg", avg: "28.90", rateLabel: "Economy", rate: "5.26", extra1Label: "Best", extra1: "5/70", extra2Label: "5W Hauls", extra2: "1" },
+          T20I: { matches: 57, primaryLabel: "Wickets", primary: "66", avgLabel: "Bowl Avg", avg: "23.57", rateLabel: "Economy", rate: "7.44", extra1Label: "Best", extra1: "3/15", extra2Label: "Catches", extra2: "16" }
+        },
+        recentForm: ["328 Test Wickets", "2023 ODI WC & WTC Champion", "2x T20 WC Hat-Tricks", "14 Test 5-Wicket Hauls"]
+      },
+      "joe root": {
+        name: "Joe Root", wikiTitle: "Joe_Root", country: "England", flag: "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+        role: "Top-Order Batter", style: "Right-hand Bat • Right-arm Off-break",
+        image: "https://upload.wikimedia.org/wikipedia/commons/f/f7/Joe_Root_HIP1487_%28cropped%29.jpg",
+        stats: {
+          TEST: { matches: 169, primaryLabel: "Runs", primary: "14,278", avgLabel: "Bat Avg", avg: "50.45", rateLabel: "Strike Rate", rate: "57.61", extra1Label: "High Score", extra1: "262", extra2Label: "100s / 50s", extra2: "41 / 69" },
+          ODI: { matches: 201, primaryLabel: "Runs", primary: "8,089", avgLabel: "Bat Avg", avg: "50.24", rateLabel: "Strike Rate", rate: "87.69", extra1Label: "High Score", extra1: "166*", extra2Label: "100s / 50s", extra2: "20 / 50" },
+          T20I: { matches: 32, primaryLabel: "Runs", primary: "893", avgLabel: "Bat Avg", avg: "35.72", rateLabel: "Strike Rate", rate: "126.31", extra1Label: "High Score", extra1: "90*", extra2Label: "100s / 50s", extra2: "0 / 5" }
+        },
+        recentForm: ["62 vs AUS (ODI)", "17 vs AUS (ODI)", "5 vs PAK (ODI)", "111 vs SL (ODI)", "75 vs SL (ODI)"]
+      },
+      "babar azam": {
+        name: "Babar Azam", wikiTitle: "Babar_Azam", country: "Pakistan", flag: "🇵🇰",
+        role: "Top-Order Batter", style: "Right-hand Bat • Right-arm Off-break",
+        image: "https://upload.wikimedia.org/wikipedia/commons/4/43/Babar_azam_2023.jpg",
+        stats: {
+          TEST: { matches: 61, primaryLabel: "Runs", primary: "4,366", avgLabel: "Bat Avg", avg: "43.22", rateLabel: "Strike Rate", rate: "54.80", extra1Label: "High Score", extra1: "196", extra2Label: "100s / 50s", extra2: "9 / 29" },
+          ODI: { matches: 138, primaryLabel: "Runs", primary: "6,401", avgLabel: "Bat Avg", avg: "55.66", rateLabel: "Strike Rate", rate: "88.50", extra1Label: "High Score", extra1: "158", extra2Label: "100s / 50s", extra2: "20 / 35" },
+          T20I: { matches: 131, primaryLabel: "Runs", primary: "4,302", avgLabel: "Bat Avg", avg: "40.20", rateLabel: "Strike Rate", rate: "129.10", extra1Label: "High Score", extra1: "122", extra2Label: "100s / 50s", extra2: "3 / 36" }
+        },
+        recentForm: ["16,000+ International Runs", "32 International Centuries", "Fastest to 5,000 ODI Runs"]
+      },
+      "rashid khan": {
+        name: "Rashid Khan", wikiTitle: "Rashid_Khan", country: "Afghanistan", flag: "🇦🇫",
+        role: "Spin Bowler & All-Rounder", style: "Right-arm Leg-break Googly • Right-hand Bat",
+        image: "https://upload.wikimedia.org/wikipedia/commons/7/71/Rashid_Khan.jpg",
+        stats: {
+          TEST: { matches: 6, primaryLabel: "Wickets", primary: "45", avgLabel: "Bowl Avg", avg: "20.44", rateLabel: "Economy", rate: "2.96", extra1Label: "Best", extra1: "7/66", extra2Label: "5W Hauls", extra2: "5" },
+          ODI: { matches: 126, primaryLabel: "Wickets", primary: "237", avgLabel: "Bowl Avg", avg: "18.91", rateLabel: "Economy", rate: "4.25", extra1Label: "Best", extra1: "7/18", extra2Label: "5W Hauls", extra2: "7" },
+          T20I: { matches: 121, primaryLabel: "Wickets", primary: "200", avgLabel: "Bowl Avg", avg: "14.10", rateLabel: "Economy", rate: "6.13", extra1Label: "Best", extra1: "5/3", extra2Label: "5W Hauls", extra2: "2" }
+        },
+        recentForm: ["0/7 vs ZIM (T20I)", "1/29 vs ZIM (T20I)", "2/20 vs ZIM (T20I)", "3/41 vs ZIM (ODI)", "4/31 vs BAN (ODI)"]
+      }
+    };
+
+    const state = {
+      matches: [...INITIAL_ICC_MATCHES],
+      cardPredictions: {}, // Stores inline win% predictions per match card
+      activeFilter: "ALL",
+      currentPlayer: PLAYER_DB["jasprit bumrah"],
+      currentPlayerTab: "TEST",
+      playerLookupSeq: 0,
+      geminiKey: localStorage.getItem("cricpredict_gemini_key") || "",
+      cricApiKey: localStorage.getItem("cricpredict_cricapi_key") || ""
+    };
+
+    const $ = (id) => document.getElementById(id);
+
+    function showToast(msg) {
+      const toast = $("toast");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 3200);
+    }
+
+    function updateEnginePill() {
+      const pill = $("engineStatusPill");
+      if (state.geminiKey) {
+        pill.textContent = "ML Engine: Gemini 2.5 + Search Grounding";
+        pill.style.borderColor = "rgba(0, 255, 136, 0.7)";
+        pill.style.color = "#00ff88";
+        pill.style.background = "rgba(0, 255, 136, 0.12)";
+      } else {
+        pill.textContent = "ML Engine: XGBoost Simulation";
+      }
+    }
+
+    function getTeamMeta(name) {
+      const key = Object.keys(TEAM_META).find(k => k.toLowerCase() === (name || "").trim().toLowerCase());
+      return key ? TEAM_META[key] : { code: (name || "TM").slice(0, 3).toUpperCase(), flag: "🏏", ratings: { TEST: 75, ODI: 75, T20I: 75 }, form5: 3 };
+    }
+
+    function getCountryFlag(countryName) {
+      const low = (countryName || "").toLowerCase();
+      for (const [k, flag] of Object.entries(COUNTRY_FLAGS)) {
+        if (low.includes(k)) return flag;
+      }
+      return "🏏";
+    }
+
+    function normalizeCountryName(rawCountry) {
+      let cleaned = (rawCountry || "ICC International")
+        .replace(/\(.*?\)/g, "")
+        .replace(/\[\d+\]/g, "")
+        .replace(/\bcap\s*\d+/gi, "")
+        .replace(/\s+/g, " ")
+        .trim();
+      for (const nation of Object.keys(COUNTRY_FLAGS)) {
+        if (cleaned.toLowerCase().includes(nation)) {
+          return nation.replace(/\b\w/g, ch => ch.toUpperCase());
+        }
+      }
+      return cleaned.split(/[,/•]/)[0].trim() || "ICC International";
+    }
+
+    function normalizeRole(rawRole) {
+      return (rawRole || "Cricketer")
+        .replace(/\(.*?\)/g, "")
+        .replace(/\[\d+\]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function isOfficialICCMatch(text) {
+      const lower = (text || "").toLowerCase();
+      const banned = ["ipl", "bbl", "big bash", "psl", "cpl", "sa20", "ilt20", "hundred", "syed mushtaq", "ranji", "sheffield", "vitality blast", "county", "wpl", "mlc", "bpl"];
+      return !banned.some(term => lower.includes(term));
+    }
+
+    function oversToFloat(overs) {
+      const whole = Math.floor(overs);
+      const balls = Math.round((overs - whole) * 10);
+      return whole + Math.min(balls, 5) / 6;
+    }
+
+    // -------------------------------------------------------------------------
+    // SHARED XGBOOST-WEIGHTED ML ENGINE
+    // -------------------------------------------------------------------------
+    function runMLClassification(input) {
+      const metaA = getTeamMeta(input.teamA);
+      const metaB = getTeamMeta(input.teamB);
+      const fmt = input.format;
+
+      // 1. Head-to-Head (20% Weight)
+      const h2hEdgeA = Math.max(-1, Math.min(1, (input.h2hScore || 0) / 10));
+
+      // 2. Recent 5-Match ICC Form (25% Weight)
+      const formEdgeA = Math.max(-1, Math.min(1, ((input.formA ?? 3) - (input.formB ?? 3)) / 5));
+
+      // 3. Pitch, Weather & Toss Impact (20% Weight)
+      let pitchEdgeA = 0;
+      const vLow = (input.venue || "").toLowerCase();
+      if (vLow.includes("johannesburg") || vLow.includes("centurion") || vLow.includes("perth") || vLow.includes("wellington")) {
+        if (["South Africa", "Australia", "New Zealand", "England"].includes(input.teamA)) pitchEdgeA += 0.25;
+        if (["South Africa", "Australia", "New Zealand", "England"].includes(input.teamB)) pitchEdgeA -= 0.25;
+      }
+      if ((input.pitch || "").includes("Spin") && ["India", "Afghanistan", "Sri Lanka", "Pakistan"].includes(input.teamA)) pitchEdgeA += 0.25;
+      if ((input.pitch || "").includes("Spin") && ["India", "Afghanistan", "Sri Lanka", "Pakistan"].includes(input.teamB)) pitchEdgeA -= 0.25;
+
+      // Dew favors chasing team (2nd innings batting team)
+      const chasingTeam = input.innings === "2" ? input.batting : (input.tossDecision === "BOWL" ? input.tossWinner : null);
+      if (input.weather === "DEW" && chasingTeam) {
+        pitchEdgeA += chasingTeam === "A" ? 0.35 : -0.35;
+      }
+      if (input.weather === "OVERCAST" && input.tossDecision === "BOWL" && input.tossWinner !== "PENDING") {
+        pitchEdgeA += input.tossWinner === "A" ? 0.25 : -0.25;
+      }
+      if (input.weather === "WORN" && fmt === "TEST" && input.tossDecision === "BAT" && input.tossWinner !== "PENDING") {
+        pitchEdgeA += input.tossWinner === "A" ? 0.25 : -0.25;
+      }
+      if (input.tossWinner === "A") pitchEdgeA += 0.12;
+      if (input.tossWinner === "B") pitchEdgeA -= 0.12;
+      pitchEdgeA = Math.max(-1, Math.min(1, pitchEdgeA));
+
+      // 4. Live Match State Counter (35% Weight)
+      let liveEdgeA = 0;
+      const oversDec = oversToFloat(input.overs || 0);
+      const wktsInHand = Math.max(0, 10 - (input.wickets || 0));
+      const crr = oversDec > 0 ? input.runs / oversDec : 0;
+      const maxOv = input.maxOvers || (fmt === "T20I" ? 20 : fmt === "ODI" ? 50 : 90);
+
+      if (input.phase !== "PRE_MATCH" || input.runs > 0 || input.wickets > 0 || input.target > 0) {
+        const parCRR = fmt === "T20I" ? 8.5 : fmt === "ODI" ? 5.7 : 3.5;
+        let batAdv = oversDec > 0 ? ((crr - parCRR) / parCRR) * 0.45 : 0;
+        batAdv += (wktsInHand - 6) * 0.11;
+        batAdv += Math.min(0.25, (input.partnership || 0) / 300);
+        batAdv += (input.momentum || 0) * 0.22;
+
+        if (input.target > 0) {
+          if (fmt === "TEST") {
+            const deficit = input.target - input.runs;
+            if (deficit <= 0 && wktsInHand > 0) batAdv += 0.65;
+            else if (deficit <= 120 && wktsInHand >= 5) batAdv += 0.32;
+            else if (deficit > 220 && wktsInHand <= 5) batAdv -= 0.55;
+            else batAdv -= Math.min(0.4, deficit / 600);
+          } else {
+            const remOv = Math.max(0.15, maxOv - oversDec);
+            const rrr = (input.target - input.runs) / remOv;
+            if (input.runs >= input.target) {
+              batAdv = 1.0;
+            } else if (input.wickets >= 10 || oversDec >= maxOv) {
+              batAdv = -1.0;
+            } else {
+              const rrrPressure = (parCRR - rrr) * 0.22;
+              batAdv += Math.max(-0.9, Math.min(0.9, rrrPressure));
+            }
+          }
+        }
+        batAdv = Math.max(-1, Math.min(1, batAdv));
+        liveEdgeA = input.batting === "A" ? batAdv : -batAdv;
+      }
+
+      const compositeScore = (0.20 * h2hEdgeA) + (0.25 * formEdgeA) + (0.20 * pitchEdgeA) + (0.35 * liveEdgeA);
+      let probA = Math.round(Math.max(4, Math.min(96, 50 + compositeScore * 45)));
+      if (input.target > 0 && fmt !== "TEST") {
+        if (input.runs >= input.target) probA = input.batting === "A" ? 99 : 1;
+        else if (input.wickets >= 10 || oversDec >= maxOv) probA = input.batting === "A" ? 1 : 99;
+      }
+      const probB = 100 - probA;
+
+      const margin = Math.abs(probA - probB);
+      const confidence = margin >= 28 ? "High" : margin >= 12 ? "Medium" : "Low";
+      const favored = probA >= probB ? input.teamA : input.teamB;
+
+      const liveDesc = input.phase === "PRE_MATCH" && input.runs === 0 && input.wickets === 0
+        ? "Pre-match state (0.0 ov); toss, H2H, and recent 5-match form dominate baseline odds."
+        : `${input.batting === "A" ? input.teamA : input.teamB} are ${input.runs}/${input.wickets} (${input.overs} ov, CRR ${crr.toFixed(2)}) with ${wktsInHand} wkts in hand & ${input.partnership || 0}-run stand.`;
+
+      return {
+        teamAProb: probA,
+        teamBProb: probB,
+        confidence,
+        favored,
+        topDriver: input.phase !== "PRE_MATCH" || input.runs > 0
+          ? `${metaA.code} vs ${metaB.code} • Live CRR ${crr.toFixed(2)} (${wktsInHand} wkts left)`
+          : `Baseline H2H + Form • ${favored} edge`,
+        reasons: [
+          `Live Match State (35% weight): ${liveDesc}`,
+          `H2H & Recent 5-Match ICC Form (45% combined): ${input.teamA} (${input.formA}/5 wins) vs ${input.teamB} (${input.formB}/5 wins) with H2H edge ${input.h2hScore >= 0 ? "+" : ""}${input.h2hScore} toward ${input.h2hScore >= 0 ? input.teamA : input.teamB}.`,
+          `Pitch, Weather & Toss (20% weight): ${input.pitch} (${input.weather}) at ${input.venue || "ICC Venue"} favors ${pitchEdgeA >= 0 ? input.teamA : input.teamB}.`
+        ],
+        features: [
+          { label: "Live Match State (35%)", pct: Math.round(50 + liveEdgeA * 45), favors: liveEdgeA >= 0 ? input.teamA : input.teamB },
+          { label: "Last 5 ICC Form (25%)", pct: Math.round(50 + formEdgeA * 45), favors: formEdgeA >= 0 ? input.teamA : input.teamB },
+          { label: "Format H2H (20%)", pct: Math.round(50 + h2hEdgeA * 45), favors: h2hEdgeA >= 0 ? input.teamA : input.teamB },
+          { label: "Pitch, Dew & Toss (20%)", pct: Math.round(50 + pitchEdgeA * 45), favors: pitchEdgeA >= 0 ? input.teamA : input.teamB }
+        ]
+      };
+    }
+
+    // -------------------------------------------------------------------------
+    // FEATURE 1: LIVE & RECENT ICC MATCHES FEED WITH INLINE PREDICT %
+    // -------------------------------------------------------------------------
+    function renderMatchesFeed() {
+      const container = $("matchesFeed");
+      const filtered = state.matches.filter(m =>
+        state.activeFilter === "ALL" ? true : m.format === state.activeFilter
+      );
+      if (!filtered.length) {
+        container.innerHTML = `<div class="match-card"><p style="color:var(--text-muted)">No official ${state.activeFilter} matches found.</p></div>`;
+        return;
+      }
+      container.innerHTML = filtered.map(m => {
+        const metaA = getTeamMeta(m.teamA);
+        const metaB = getTeamMeta(m.teamB);
+        const statusClass = m.status === "LIVE" ? "status-live" : m.status === "RECENT" ? "status-recent" : "status-upcoming";
+        const statusHTML = m.status === "LIVE" ? `<span class="pulse-dot"></span> LIVE` : m.status;
+        const pred = state.cardPredictions[m.id];
+
+        const inlinePredHTML = pred ? `
+          <div class="card-inline-pred">
+            <div class="card-pred-top">
+              <span style="color:var(--neon-green);">${metaA.code} ${pred.teamAProb}%</span>
+              <span class="mini-tag gold" style="font-size:0.65rem; padding:2px 7px;">${pred.confidence} Conf.</span>
+              <span style="color:var(--neon-cyan);">${pred.teamBProb}% ${metaB.code}</span>
+            </div>
+            <div class="card-pred-bar">
+              <div style="width:${pred.teamAProb}%; background:var(--neon-green); box-shadow:0 0 8px var(--neon-green);"></div>
+              <div style="width:${pred.teamBProb}%; background:var(--neon-cyan); box-shadow:0 0 8px var(--neon-cyan);"></div>
+            </div>
+            <div class="card-pred-driver">${pred.topDriver}</div>
+          </div>
+        ` : "";
+
+        return `
+          <article class="match-card" data-id="${m.id}">
+            <div>
+              <div class="match-meta">
+                <span class="format-tag">${m.format}</span>
+                <span class="status-badge ${statusClass}">${statusHTML}</span>
+              </div>
+              <div class="series-name" style="margin-top:8px;" title="${m.series}">${m.series}</div>
+            </div>
+            <div class="teams-stack">
+              <div class="team-row">
+                <span class="team-id"><span>${metaA.flag}</span><span>${m.teamA}</span></span>
+                <span class="team-score">${m.scoreA}</span>
+              </div>
+              <div class="team-row">
+                <span class="team-id"><span>${metaB.flag}</span><span>${m.teamB}</span></span>
+                <span class="team-score">${m.scoreB}</span>
+              </div>
+            </div>
+            <div class="match-summary">${m.summary}</div>
+            ${inlinePredHTML}
+            <div class="match-footer">
+              <span class="venue-text" title="${m.venue}">📍 ${m.venue}</span>
+              <div class="card-btn-group">
+                <button class="btn-mini-ghost" title="Copy into Playground" onclick="loadMatchIntoPlayground('${m.id}')">↗</button>
+                <button class="btn-mini" onclick="predictOnCard('${m.id}')">⚡ Predict</button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    window.predictOnCard = async function(matchId) {
+      const m = state.matches.find(x => x.id === matchId);
+      if (!m) return;
+      const metaA = getTeamMeta(m.teamA);
+      const metaB = getTeamMeta(m.teamB);
+      const rDiff = (metaA.ratings[m.format] || 78) - (metaB.ratings[m.format] || 78);
+      const ls = m.liveState || { innings: "1", batting: "A", phase: "PRE_MATCH", runs: 0, wickets: 0, overs: 0, target: 0, maxOvers: m.format === "T20I" ? 20 : m.format === "ODI" ? 50 : 90, partnership: 0, momentum: 0 };
+
+      const input = {
+        teamA: m.teamA, teamB: m.teamB, format: m.format, venue: m.venue,
+        pitch: m.pitch || "Balanced Sporting Track", weather: m.weather || "NEUTRAL",
+        tossWinner: m.tossWinner || "PENDING", tossDecision: m.tossDecision || "PENDING",
+        h2hScore: Math.max(-10, Math.min(10, Math.round(rDiff / 2))),
+        formA: metaA.form5, formB: metaB.form5,
+        ...ls
+      };
+
+      const res = runMLClassification(input);
+      state.cardPredictions[matchId] = res;
+      renderMatchesFeed();
+      showToast(`${m.teamA} ${res.teamAProb}% — ${m.teamB} ${res.teamBProb}% (${res.confidence} Confidence)`);
+    };
+
+    window.loadMatchIntoPlayground = function(matchId) {
+      const m = state.matches.find(x => x.id === matchId);
+      if (!m) return;
+      const metaA = getTeamMeta(m.teamA);
+      const metaB = getTeamMeta(m.teamB);
+      const rDiff = (metaA.ratings[m.format] || 78) - (metaB.ratings[m.format] || 78);
+      const ls = m.liveState || {};
+
+      $("teamAInput").value = m.teamA;
+      $("teamBInput").value = m.teamB;
+      $("formatInput").value = m.format;
+      $("venueInput").value = m.venue;
+      $("pitchInput").value = m.pitch || "Balanced Sporting Track";
+      $("weatherInput").value = m.weather || "NEUTRAL";
+      $("tossWinnerSelect").value = m.tossWinner || "PENDING";
+      $("tossDecisionSelect").value = m.tossDecision || "PENDING";
+      $("h2hSlider").value = Math.max(-10, Math.min(10, Math.round(rDiff / 2)));
+      $("formAInput").value = metaA.form5;
+      $("formBInput").value = metaB.form5;
+
+      $("inningsInput").value = ls.innings || "1";
+      $("battingTeamSelect").value = ls.batting || "A";
+      $("phaseSelect").value = ls.phase || "PRE_MATCH";
+      $("runsInput").value = ls.runs ?? 0;
+      $("wicketsInput").value = ls.wickets ?? 0;
+      $("oversInput").value = ls.overs ?? 0;
+      $("targetInput").value = ls.target ?? 0;
+      $("partnershipInput").value = ls.partnership ?? 0;
+      $("maxOversInput").value = ls.maxOvers ?? (m.format === "T20I" ? 20 : m.format === "ODI" ? 50 : 90);
+      $("momentumSelect").value = String(ls.momentum ?? 0);
+
+      syncSliderLabels();
+      updateLiveMetricsPreview();
+      runPlaygroundPrediction();
+      showToast(`Copied ${m.teamA} vs ${m.teamB} into Playground`);
+    };
+
+    async function syncLiveICCFeed() {
+      const btn = $("refreshMatchesBtn");
+      btn.disabled = true;
+      btn.innerHTML = `<span class="spinner"></span> Syncing ICC Feed...`;
+      try {
+        if (state.geminiKey) {
+          const prompt = `Search for official ICC international cricket matches (Tests, ODIs, T20Is, WTC, World Cup) live today, finished in last 3 days, or upcoming in next 7 days. STRICTLY EXCLUDE domestic leagues (IPL, BBL, PSL, etc.). Return ONLY a valid JSON array of up to 6 matches with keys: id, format ("TEST"|"ODI"|"T20I"), status ("LIVE"|"RECENT"|"UPCOMING"), series, venue, pitch, teamA, teamB, scoreA, scoreB, summary, liveState ({ innings: "1"|"2", batting: "A"|"B", phase: "PRE_MATCH"|"POWERPLAY"|"LIVE_MIDDLE"|"DEATH", runs: number, wickets: number, overs: number, target: number }).`;
+          const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(state.geminiKey)}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], tools: [{ google_search: {} }] })
+          });
+          const data = await res.json();
+          const text = data?.candidates?.[0]?.content?.parts?.map(p => p.text).join("\n") || "";
+          const jsonMatch = text.match(/\[[\s\S]*\]/);
+          if (jsonMatch) {
+            const parsed = JSON.parse(jsonMatch[0]).filter(m => isOfficialICCMatch(m.series + " " + m.teamA + " " + m.teamB));
+            if (parsed.length) {
+              state.matches = parsed;
+              state.cardPredictions = {};
+              renderMatchesFeed();
+              showToast(`Synced ${parsed.length} live/upcoming ICC matches via Google Search`);
+              return;
+            }
+          }
+        } else if (state.cricApiKey) {
+          const res = await fetch(`https://api.cricapi.com/v1/currentMatches?apikey=${encodeURIComponent(state.cricApiKey)}&offset=0`);
+          const data = await res.json();
+          if (data?.data?.length) {
+            const iccOnly = data.data
+              .filter(m => ["test", "odi", "t20"].includes((m.matchType || "").toLowerCase()) && isOfficialICCMatch(m.name + " " + (m.series || "")))
+              .slice(0, 8)
+              .map((m, idx) => ({
+                id: m.id || `cric-${idx}`,
+                format: (m.matchType || "ODI").toUpperCase() === "T20" ? "T20I" : (m.matchType || "ODI").toUpperCase(),
+                status: m.matchEnded ? "RECENT" : m.matchStarted ? "LIVE" : "UPCOMING",
+                series: m.name || "ICC International Match",
+                venue: m.venue || "ICC Venue", pitch: "Balanced Sporting Track",
+                teamA: m.teams?.[0] || "Team A", teamB: m.teams?.[1] || "Team B",
+                scoreA: m.score?.[0] ? `${m.score[0].r}/${m.score[0].w} (${m.score[0].o} ov)` : "Scheduled",
+                scoreB: m.score?.[1] ? `${m.score[1].r}/${m.score[1].w} (${m.score[1].o} ov)` : "Yet to bat",
+                summary: m.status || "ICC Match",
+                liveState: { innings: "1", batting: "A", phase: m.matchStarted ? "LIVE_MIDDLE" : "PRE_MATCH", runs: m.score?.[0]?.r || 0, wickets: m.score?.[0]?.w || 0, overs: m.score?.[0]?.o || 0, target: 0 }
+              }));
+            if (iccOnly.length) {
+              state.matches = iccOnly;
+              state.cardPredictions = {};
+              renderMatchesFeed();
+              showToast(`Synced ${iccOnly.length} official ICC matches from CricAPI`);
+              return;
+            }
+          }
+        }
+        renderMatchesFeed();
+        showToast("ICC Feed refreshed");
+      } catch (err) {
+        console.error(err);
+        showToast("Sync fallback active — displaying grounded ICC matches");
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `↻ Sync Live ICC Feed`;
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // FEATURE 2: USER'S AI MATCH PREDICTOR PLAYGROUND
+    // -------------------------------------------------------------------------
+    function syncSliderLabels() {
+      const h2h = parseInt($("h2hSlider").value, 10) || 0;
+      const tA = ($("teamAInput").value.trim() || "Team A").slice(0, 12);
+      const tB = ($("teamBInput").value.trim() || "Team B").slice(0, 12);
+      $("h2hLabel").textContent = h2h === 0 ? "Even (0)" : h2h > 0 ? `${tA} +${h2h}` : `${tB} +${Math.abs(h2h)}`;
+      $("formALabel").textContent = `${$("formAInput").value} / 5`;
+      $("formBLabel").textContent = `${$("formBInput").value} / 5`;
+    }
+
+    function updateLiveMetricsPreview() {
+      const runs = parseFloat($("runsInput").value) || 0;
+      const wkts = parseInt($("wicketsInput").value, 10) || 0;
+      const oversRaw = parseFloat($("oversInput").value) || 0;
+      const target = parseFloat($("targetInput").value) || 0;
+      const format = $("formatInput").value;
+      const maxOvers = parseFloat($("maxOversInput").value) || (format === "T20I" ? 20 : format === "ODI" ? 50 : 90);
+      const oversDecimal = oversToFloat(oversRaw);
+      const crr = oversDecimal > 0 ? (runs / oversDecimal).toFixed(2) : "0.00";
+      const remOvers = Math.max(0.1, maxOvers - oversDecimal);
+      const rrr = target > runs && oversDecimal < maxOvers && format !== "TEST"
+        ? ` | RRR: ${((target - runs) / remOvers).toFixed(2)}`
+        : (target > runs && format === "TEST" ? ` | Trail: ${target - runs}` : "");
+      $("liveMetricsPreview").textContent = `CRR: ${crr}${rrr} | Wkts: ${Math.max(0, 10 - wkts)}`;
+    }
+
+    function readPlaygroundInput() {
+      return {
+        teamA: $("teamAInput").value.trim() || "Team A",
+        teamB: $("teamBInput").value.trim() || "Team B",
+        format: $("formatInput").value,
+        venue: $("venueInput").value.trim() || "ICC Venue",
+        innings: $("inningsInput").value,
+        h2hScore: parseInt($("h2hSlider").value, 10) || 0,
+        formA: parseInt($("formAInput").value, 10) || 0,
+        formB: parseInt($("formBInput").value, 10) || 0,
+        pitch: $("pitchInput").value,
+        weather: $("weatherInput").value,
+        tossWinner: $("tossWinnerSelect").value,
+        tossDecision: $("tossDecisionSelect").value,
+        batting: $("battingTeamSelect").value,
+        phase: $("phaseSelect").value,
+        momentum: parseInt($("momentumSelect").value, 10) || 0,
+        runs: parseFloat($("runsInput").value) || 0,
+        wickets: parseInt($("wicketsInput").value, 10) || 0,
+        overs: parseFloat($("oversInput").value) || 0,
+        target: parseFloat($("targetInput").value) || 0,
+        partnership: parseFloat($("partnershipInput").value) || 0,
+        maxOvers: parseFloat($("maxOversInput").value) || 50
+      };
+    }
+
+    function renderPlaygroundOutput(input, result) {
+      const metaA = getTeamMeta(input.teamA);
+      const metaB = getTeamMeta(input.teamB);
+      const confClass = result.confidence === "High" ? "conf-high" : result.confidence === "Medium" ? "conf-medium" : "conf-low";
+
+      $("predictionOutput").innerHTML = `
+        <div class="pred-header">
+          <div style="font-weight:800; font-size:0.95rem; color:var(--text-main);">
+            Win Probability Split • <span style="color:var(--neon-cyan)">${input.format}</span>
+          </div>
+          <span class="confidence-badge ${confClass}">Confidence: ${result.confidence}</span>
+        </div>
+        <div class="prob-scoreboard">
+          <div class="prob-team">
+            <span class="prob-team-name">${metaA.flag} ${input.teamA}</span>
+            <span class="prob-pct team-a">${result.teamAProb}%</span>
+          </div>
+          <div class="prob-team right">
+            <span class="prob-team-name">${input.teamB} ${metaB.flag}</span>
+            <span class="prob-pct team-b">${result.teamBProb}%</span>
+          </div>
+        </div>
+        <div class="split-bar-wrap">
+          <div class="split-bar-a" style="width:${result.teamAProb}%"></div>
+          <div class="split-bar-b" style="width:${result.teamBProb}%"></div>
+        </div>
+        <div class="feature-importance-box">
+          <div class="fi-title">ML Feature Importance Breakdown</div>
+          ${(result.features || []).map((f, i) => {
+            const colors = ["var(--neon-cyan)", "var(--neon-green)", "var(--neon-gold)", "var(--neon-amber)"];
+            return `
+              <div class="fi-row">
+                <span style="color:#cbd5e1; font-weight:600;">${f.label}</span>
+                <div class="fi-bar-bg"><div class="fi-bar-fill" style="width:${Math.max(12, Math.min(100, f.pct))}%; background:${colors[i % 4]}; box-shadow:0 0 8px ${colors[i % 4]}"></div></div>
+                <span style="font-family:var(--font-mono); color:${colors[i % 4]}; text-align:right; font-weight:700;">${getTeamMeta(f.favors).code}</span>
+              </div>
+            `;
+          }).join("")}
+        </div>
+        <ul class="reasons-list">
+          ${(result.reasons || []).slice(0, 3).map(r => `<li>${r}</li>`).join("")}
+        </ul>
+      `;
+    }
+
+    async function runPlaygroundPrediction(useGemini = false) {
+      const btn = $("runPredictionBtn");
+      const input = readPlaygroundInput();
+
+      if (useGemini && state.geminiKey) {
+        btn.disabled = true;
+        btn.innerHTML = `<span class="spinner"></span> Running AI Model...`;
+        try {
+          const prompt = `Act as an XGBoost ICC Cricket Win-Probability ML Engine. Analyze ONLY this official ICC ${input.format} scenario: Team A ${input.teamA} (last 5 form: ${input.formA}/5) vs Team B ${input.teamB} (last 5 form: ${input.formB}/5), H2H Edge=${input.h2hScore}/10, Venue=${input.venue}, Pitch=${input.pitch}, Weather=${input.weather}, Toss=${input.tossWinner} ${input.tossDecision}, Innings=${input.innings}, Batting=${input.batting === "A" ? input.teamA : input.teamB}, Phase=${input.phase}, Score=${input.runs}/${input.wickets} in ${input.overs}/${input.maxOvers} ov, Target=${input.target || "N/A"}, Partnership=${input.partnership}, Momentum=${input.momentum}. Weigh: H2H (20%), Recent Form (25%), Pitch/Weather/Toss (20%), Live State (35%). Return ONLY valid JSON: { "teamAProb": number, "teamBProb": number, "confidence": "Low"|"Medium"|"High", "reasons": ["b1","b2","b3"], "features": [{"label":"Live Match State (35%)","pct":0,"favors":"Team"},{"label":"Last 5 ICC Form (25%)","pct":0,"favors":"Team"},{"label":"Format H2H (20%)","pct":0,"favors":"Team"},{"label":"Pitch, Dew & Toss (20%)","pct":0,"favors":"Team"}] }`;
+          const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(state.geminiKey)}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], tools: [{ google_search: {} }] })
+          });
+          const data = await res.json();
+          const text = data?.candidates?.[0]?.content?.parts?.map(p => p.text).join("\n") || "";
+          const match = text.match(/\{[\s\S]*\}/);
+          if (match) {
+            renderPlaygroundOutput(input, JSON.parse(match[0]));
+            btn.disabled = false;
+            btn.innerHTML = `⚡ Run AI Prediction`;
+            return;
+          }
+        } catch (e) { console.warn("Gemini fallback:", e); }
+        btn.disabled = false;
+        btn.innerHTML = `⚡ Run AI Prediction`;
+      }
+
+      const simResult = runMLClassification(input);
+      renderPlaygroundOutput(input, simResult);
+    }
+
+    // -------------------------------------------------------------------------
+    // FEATURE 3: LIVE WIKIPEDIA PHOTO + INFOBOX STATS PARSER (ANY CRICKETER!)
+    // -------------------------------------------------------------------------
+    const SILHOUETTE_SVG = `
+      <svg viewBox="0 0 100 120" width="76" height="90" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="34" r="18" fill="rgba(0,240,255,0.22)" stroke="#00f0ff" stroke-width="2"/>
+        <path d="M18 106C18 82 32 68 50 68C68 68 82 82 82 106" fill="rgba(0,255,136,0.18)" stroke="#ffe600" stroke-width="2"/>
+        <text x="50" y="114" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="sans-serif">ICC PROFILE</text>
+      </svg>`;
+
+    window.handleAvatarError = function(imgEl) {
+      if (imgEl && imgEl.parentElement) {
+        imgEl.parentElement.innerHTML = SILHOUETTE_SVG;
+      }
+    };
+
+    function cleanWikiText(str) {
+      return (str || "")
+        .replace(/\[\d+\]/g, "")
+        .replace(/\[[a-z]\]/gi, "")
+        .replace(/\u2013|\u2014/g, "-")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    async function resolveCricketerWikiPage(playerName, wikiTitleHint) {
+      const trySummary = async (title) => {
+        const res = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`);
+        if (!res.ok) return null;
+        const data = await res.json();
+        if (data.type === "disambiguation") return null;
+        const context = `${data.description || ""} ${data.extract || ""}`.toLowerCase();
+        if (!context.includes("cricket")) return null;
+        return {
+          title: data.title,
+          wikiSlug: title,
+          description: data.description || "International Cricketer",
+          image: data.thumbnail?.source || data.originalimage?.source || null
+        };
+      };
+
+      if (wikiTitleHint) {
+        const direct = await trySummary(wikiTitleHint);
+        if (direct) return direct;
+      }
+
+      const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(playerName + " cricketer")}&srlimit=5&format=json&origin=*`;
+      const searchRes = await fetch(searchUrl);
+      const searchData = await searchRes.json();
+      const hits = (searchData?.query?.search || []).filter(item =>
+        !item.title.toLowerCase().startsWith("list of") &&
+        !item.title.toLowerCase().includes("(disambiguation)")
+      );
+      for (const hit of hits) {
+        const resolved = await trySummary(hit.title.replace(/\s+/g, "_"));
+        if (resolved) return resolved;
+      }
+      return null;
+    }
+
+    async function fetchWikipediaInfoboxStats(wikiSlug) {
+      try {
+        const url = `https://en.wikipedia.org/w/api.php?action=parse&page=${encodeURIComponent(wikiSlug)}&prop=text&section=0&format=json&origin=*`;
+        const res = await fetch(url);
+        if (!res.ok) return null;
+        const json = await res.json();
+        const html = json?.parse?.text?.["*"];
+        if (!html) return null;
+
+        const doc = new DOMParser().parseFromString(html, "text/html");
+        const infobox = doc.querySelector("table.infobox");
+        if (!infobox) return null;
+
+        let country = "ICC International", batting = "", bowling = "", role = "Cricketer";
+        infobox.querySelectorAll("tr").forEach(tr => {
+          const th = cleanWikiText(tr.querySelector("th")?.textContent).toLowerCase();
+          const td = cleanWikiText(tr.querySelector("td")?.textContent);
+          if (!th || !td) return;
+          if (th === "national side" || th === "country") country = normalizeCountryName(td);
+          else if (th === "batting") batting = cleanWikiText(td.replace(/\(.*?\)/g, ""));
+          else if (th === "bowling") bowling = cleanWikiText(td.replace(/\(.*?\)/g, ""));
+          else if (th === "role") role = normalizeRole(td);
+        });
+
+        let statsTable = null;
+        for (const tr of infobox.querySelectorAll("tr")) {
+          const firstCell = cleanWikiText(tr.querySelector("th, td")?.textContent).toLowerCase();
+          if (firstCell === "competition") {
+            statsTable = tr.closest("table");
+            break;
+          }
+        }
+        if (!statsTable) return null;
+
+        const colMap = {};
+        const rows = Array.from(statsTable.querySelectorAll("tr"));
+        const compRow = rows.find(r => cleanWikiText(r.querySelector("th, td")?.textContent).toLowerCase() === "competition");
+        if (!compRow) return null;
+
+        const headerCells = Array.from(compRow.querySelectorAll("th, td"));
+        headerCells.forEach((cell, idx) => {
+          if (idx === 0) return;
+          const label = cleanWikiText(cell.textContent).toUpperCase();
+          if (label === "TEST" || label === "TESTS") colMap.TEST = idx;
+          else if (label === "ODI" || label === "ODIS") colMap.ODI = idx;
+          else if (label === "T20I" || label === "T20IS") colMap.T20I = idx;
+        });
+
+        const raw = { TEST: {}, ODI: {}, T20I: {} };
+        rows.forEach(tr => {
+          const cells = Array.from(tr.querySelectorAll("th, td"));
+          if (cells.length < 2) return;
+          const metric = cleanWikiText(cells[0].textContent).toLowerCase();
+          for (const fmt of ["TEST", "ODI", "T20I"]) {
+            const cIdx = colMap[fmt];
+            if (cIdx !== undefined && cells[cIdx]) {
+              raw[fmt][metric] = cleanWikiText(cells[cIdx].textContent);
+            }
+          }
+        });
+
+        const isBowler = role.toLowerCase().includes("bowler") && !role.toLowerCase().includes("all");
+        const formatStats = {};
+        for (const fmt of ["TEST", "ODI", "T20I"]) {
+          const d = raw[fmt];
+          if (!d.matches) {
+            formatStats[fmt] = {
+              matches: "0", primaryLabel: "Runs / Wkts", primary: "-",
+              avgLabel: "Average", avg: "-", rateLabel: "Career", rate: "Not Played",
+              extra1Label: "Best", extra1: "-", extra2Label: "Milestones", extra2: "-"
+            };
+          } else if (isBowler || (parseInt((d.wickets || "0").replace(/,/g, ""), 10) > 40 && parseInt((d.runs || d["runs scored"] || "0").replace(/,/g, ""), 10) < 1500)) {
+            formatStats[fmt] = {
+              matches: d.matches,
+              primaryLabel: "Wickets",
+              primary: d.wickets || "0",
+              avgLabel: "Bowl Avg",
+              avg: d["bowling average"] || "-",
+              rateLabel: "Balls Bowled",
+              rate: d["balls bowled"] || "-",
+              extra1Label: "Best Bowling",
+              extra1: d["best bowling"] || "-",
+              extra2Label: "5W / 10W",
+              extra2: `${d["5 wickets in innings"] || "0"} / ${d["10 wickets in match"] || "0"}`
+            };
+          } else {
+            formatStats[fmt] = {
+              matches: d.matches,
+              primaryLabel: "Runs",
+              primary: d["runs scored"] || d.runs || "0",
+              avgLabel: "Bat Avg",
+              avg: d["batting average"] || "-",
+              rateLabel: d.wickets && d.wickets !== "0" && d.wickets !== "-" ? "Wickets" : "Catches / St",
+              rate: d.wickets && d.wickets !== "0" && d.wickets !== "-" ? d.wickets : (d["catches/stumpings"] || "-"),
+              extra1Label: "High Score",
+              extra1: d["top score"] || "-",
+              extra2Label: "100s / 50s",
+              extra2: d["100s/50s"] || "-"
+            };
+          }
+        }
+
+        const availableTabs = ["TEST", "ODI", "T20I"].filter(f => formatStats[f].matches !== "0");
+        return {
+          country,
+          flag: getCountryFlag(country),
+          role,
+          style: [batting, bowling].filter(Boolean).join(" • "),
+          stats: formatStats,
+          defaultTab: availableTabs[0] || "ODI"
+        };
+      } catch (err) {
+        console.warn("Wikipedia infobox parse failed:", err);
+        return null;
+      }
+    }
+
+    function renderPlayerCard() {
+      const p = state.currentPlayer;
+      const tab = state.currentPlayerTab;
+      const st = p.stats[tab] || p.stats.ODI || p.stats.TEST;
+
+      $("playerCardContainer").innerHTML = `
+        <div class="trading-card">
+          <div class="card-top">
+            <div class="avatar-frame" id="playerAvatarFrame">
+              ${p.image
+                ? `<img src="${p.image}" alt="${p.name}" referrerpolicy="no-referrer" onerror="handleAvatarError(this)" />`
+                : SILHOUETTE_SVG}
+            </div>
+            <div class="player-identity">
+              <h3>${p.name}</h3>
+              <div class="player-country">${p.flag || "🏏"} ${p.country}${p.role ? ` • ${p.role}` : ""}</div>
+              ${p.style ? `<div class="player-style-line">${p.style}</div>` : ""}
+            </div>
+          </div>
+
+          <div class="stat-tabs">
+            <button class="stat-tab ${tab === "TEST" ? "active" : ""}" onclick="switchPlayerTab('TEST')">TEST</button>
+            <button class="stat-tab ${tab === "ODI" ? "active" : ""}" onclick="switchPlayerTab('ODI')">ODI</button>
+            <button class="stat-tab ${tab === "T20I" ? "active" : ""}" onclick="switchPlayerTab('T20I')">T20I</button>
+          </div>
+
+          <div class="stat-grid">
+            <div class="stat-box"><div class="stat-val">${st.matches ?? "-"}</div><div class="stat-lbl">Matches</div></div>
+            <div class="stat-box"><div class="stat-val">${st.primary ?? "-"}</div><div class="stat-lbl">${st.primaryLabel || "Runs/Wkts"}</div></div>
+            <div class="stat-box"><div class="stat-val">${st.avg ?? "-"}</div><div class="stat-lbl">${st.avgLabel || "Average"}</div></div>
+            <div class="stat-box"><div class="stat-val">${st.rate ?? "-"}</div><div class="stat-lbl">${st.rateLabel || "SR / Econ"}</div></div>
+            <div class="stat-box"><div class="stat-val">${st.extra1 ?? "-"}</div><div class="stat-lbl">${st.extra1Label || "Best"}</div></div>
+            <div class="stat-box"><div class="stat-val">${st.extra2 ?? "-"}</div><div class="stat-lbl">${st.extra2Label || "Milestones"}</div></div>
+          </div>
+
+          <div class="recent-form-strip">
+            <h4>Recent Official ICC Form / Milestones</h4>
+            <div class="form-pills">
+              ${(p.recentForm || ["Official ICC Career Stats"]).map(item => `<span class="form-pill">${item}</span>`).join("")}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    window.switchPlayerTab = function(fmt) {
+      state.currentPlayerTab = fmt;
+      renderPlayerCard();
+    };
+
+    async function lookupPlayer(rawQuery) {
+      const q = (rawQuery || "").trim();
+      if (!q) return;
+      const reqId = ++state.playerLookupSeq;
+
+      document.querySelectorAll(".quick-players .chip").forEach(c => {
+        c.classList.toggle("active", c.dataset.player.toLowerCase() === q.toLowerCase());
+      });
+
+      const localKey = Object.keys(PLAYER_DB).find(k =>
+        k === q.toLowerCase() || PLAYER_DB[k].name.toLowerCase() === q.toLowerCase()
+      );
+
+      if (localKey) {
+        state.currentPlayer = { ...PLAYER_DB[localKey] };
+        state.currentPlayerTab = "TEST";
+        renderPlayerCard();
+        const wikiPage = await resolveCricketerWikiPage(state.currentPlayer.name, state.currentPlayer.wikiTitle);
+        if (reqId === state.playerLookupSeq && wikiPage?.image && wikiPage.image !== state.currentPlayer.image) {
+          state.currentPlayer.image = wikiPage.image;
+          renderPlayerCard();
+        }
+        return;
+      }
+
+      $("playerCardContainer").innerHTML = `
+        <div class="trading-card" style="text-align:center; padding:42px 20px;">
+          <span class="spinner" style="width:28px; height:28px; color:var(--neon-cyan);"></span>
+          <p style="margin-top:12px; color:var(--text-muted);">Fetching official ICC Test/ODI/T20I stats & verified portrait for <strong>${q}</strong>...</p>
+        </div>`;
+
+      const wikiPage = await resolveCricketerWikiPage(q);
+      if (reqId !== state.playerLookupSeq) return;
+
+      const [wikiStats, geminiResult] = await Promise.all([
+        wikiPage ? fetchWikipediaInfoboxStats(wikiPage.wikiSlug) : Promise.resolve(null),
+        state.geminiKey ? (async () => {
+          try {
+            const prompt = `Look up official ICC international career statistics (STRICTLY Test, ODI, T20I — ignore IPL/domestic) for cricketer "${wikiPage?.title || q}". Return ONLY valid JSON: { "name": "${wikiPage?.title || q}", "country": "Country", "flag": "Emoji Flag", "role": "Role", "style": "Batting & Bowling style", "stats": { "TEST": {"matches": 0, "primaryLabel": "Runs or Wickets", "primary": "0", "avgLabel": "Average", "avg": "0.00", "rateLabel": "SR or Econ", "rate": "0.00", "extra1Label": "HS or Best", "extra1": "-", "extra2Label": "100s/50s or 5W", "extra2": "-"}, "ODI": {"matches": 0, "primaryLabel": "Runs or Wickets", "primary": "0", "avgLabel": "Average", "avg": "0.00", "rateLabel": "SR or Econ", "rate": "0.00", "extra1Label": "HS or Best", "extra1": "-", "extra2Label": "100s/50s or 5W", "extra2": "-"}, "T20I": {"matches": 0, "primaryLabel": "Runs or Wickets", "primary": "0", "avgLabel": "Average", "avg": "0.00", "rateLabel": "SR or Econ", "rate": "0.00", "extra1Label": "HS or Best", "extra1": "-", "extra2Label": "100s/50s or 5W", "extra2": "-"} }, "recentForm": ["Recent ICC match 1", "Recent ICC match 2", "Recent ICC match 3"] }`;
+            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(state.geminiKey)}`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], tools: [{ google_search: {} }] })
+            });
+            const data = await res.json();
+            const text = data?.candidates?.[0]?.content?.parts?.map(p => p.text).join("\n") || "";
+            const match = text.match(/\{[\s\S]*\}/);
+            return match ? JSON.parse(match[0]) : null;
+          } catch (_) { return null; }
+        })() : Promise.resolve(null)
+      ]);
+
+      if (reqId !== state.playerLookupSeq) return;
+
+      if (geminiResult) {
+        geminiResult.image = wikiPage?.image || null;
+        state.currentPlayer = geminiResult;
+        state.currentPlayerTab = "ODI";
+        renderPlayerCard();
+        return;
+      }
+
+      if (wikiStats) {
+        state.currentPlayer = {
+          name: wikiPage.title,
+          country: wikiStats.country,
+          flag: wikiStats.flag,
+          role: wikiStats.role,
+          style: wikiStats.style,
+          image: wikiPage.image,
+          stats: wikiStats.stats,
+          recentForm: [
+            `Test Matches: ${wikiStats.stats.TEST.matches}`,
+            `ODI Matches: ${wikiStats.stats.ODI.matches}`,
+            `T20I Matches: ${wikiStats.stats.T20I.matches}`
+          ]
+        };
+        state.currentPlayerTab = wikiStats.defaultTab;
+        renderPlayerCard();
+        return;
+      }
+
+      state.currentPlayer = {
+        name: wikiPage?.title || q,
+        country: "ICC International",
+        flag: "🏏",
+        role: "Cricketer",
+        style: "",
+        image: wikiPage?.image || null,
+        stats: {
+          TEST: { matches: "-", primaryLabel: "Runs / Wkts", primary: "-", avgLabel: "Average", avg: "-", rateLabel: "SR / Econ", rate: "-", extra1Label: "Best", extra1: "-", extra2Label: "Milestones", extra2: "-" },
+          ODI: { matches: "-", primaryLabel: "Runs / Wkts", primary: "-", avgLabel: "Average", avg: "-", rateLabel: "SR / Econ", rate: "-", extra1Label: "Best", extra1: "-", extra2Label: "Milestones", extra2: "-" },
+          T20I: { matches: "-", primaryLabel: "Runs / Wkts", primary: "-", avgLabel: "Average", avg: "-", rateLabel: "SR / Econ", rate: "-", extra1Label: "Best", extra1: "-", extra2Label: "Milestones", extra2: "-" }
+        },
+        recentForm: ["Try full cricketer name (e.g. 'MS Dhoni', 'KL Rahul', 'Steve Smith')"]
+      };
+      renderPlayerCard();
+    }
+
+    // -------------------------------------------------------------------------
+    // EVENT LISTENERS
+    // -------------------------------------------------------------------------
+    document.querySelectorAll("#formatFilterBar .chip").forEach(chip => {
+      chip.addEventListener("click", () => {
+        document.querySelectorAll("#formatFilterBar .chip").forEach(c => c.classList.remove("active"));
+        chip.classList.add("active");
+        state.activeFilter = chip.dataset.format;
+        renderMatchesFeed();
+      });
+    });
+
+    document.querySelectorAll(".quick-players .chip").forEach(chip => {
+      chip.addEventListener("click", () => {
+        $("playerSearchInput").value = chip.dataset.player;
+        lookupPlayer(chip.dataset.player);
+      });
+    });
+
+    $("playerSearchBtn").addEventListener("click", () => lookupPlayer($("playerSearchInput").value));
+    $("playerSearchInput").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") lookupPlayer($("playerSearchInput").value);
+    });
+
+    // Playground format auto-sets sensible overs limit while staying editable
+    $("formatInput").addEventListener("change", () => {
+      const fmt = $("formatInput").value;
+      $("maxOversInput").value = fmt === "T20I" ? 20 : fmt === "ODI" ? 50 : 90;
+    });
+
+    // Swap Teams button
+    $("swapTeamsBtn").addEventListener("click", () => {
+      const a = $("teamAInput").value;
+      $("teamAInput").value = $("teamBInput").value;
+      $("teamBInput").value = a;
+      $("h2hSlider").value = -1 * (parseInt($("h2hSlider").value, 10) || 0);
+      const fA = $("formAInput").value;
+      $("formAInput").value = $("formBInput").value;
+      $("formBInput").value = fA;
+      syncSliderLabels();
+      if ($("autoSimulateToggle").checked) runPlaygroundPrediction(false);
+    });
+
+    // Reset Playground button
+    $("resetPlaygroundBtn").addEventListener("click", () => {
+      $("teamAInput").value = "India";
+      $("teamBInput").value = "Australia";
+      $("formatInput").value = "ODI";
+      $("venueInput").value = "Melbourne Cricket Ground (MCG)";
+      $("inningsInput").value = "2";
+      $("h2hSlider").value = "0";
+      $("formAInput").value = "3";
+      $("formBInput").value = "3";
+      $("pitchInput").value = "Balanced Sporting Track";
+      $("weatherInput").value = "NEUTRAL";
+      $("tossWinnerSelect").value = "PENDING";
+      $("tossDecisionSelect").value = "PENDING";
+      $("battingTeamSelect").value = "A";
+      $("phaseSelect").value = "PRE_MATCH";
+      $("momentumSelect").value = "0";
+      $("runsInput").value = "0";
+      $("wicketsInput").value = "0";
+      $("oversInput").value = "0";
+      $("targetInput").value = "0";
+      $("partnershipInput").value = "0";
+      $("maxOversInput").value = "50";
+      syncSliderLabels();
+      updateLiveMetricsPreview();
+      runPlaygroundPrediction(false);
+      showToast("Playground reset to clean 50/50 baseline");
+    });
+
+    const playgroundIds = [
+      "teamAInput", "teamBInput", "formatInput", "venueInput", "inningsInput",
+      "h2hSlider", "formAInput", "formBInput", "pitchInput", "weatherInput",
+      "tossWinnerSelect", "tossDecisionSelect", "battingTeamSelect", "phaseSelect",
+      "momentumSelect", "runsInput", "wicketsInput", "oversInput", "targetInput",
+      "partnershipInput", "maxOversInput"
+    ];
+
+    playgroundIds.forEach(id => {
+      $(id).addEventListener("input", () => {
+        syncSliderLabels();
+        updateLiveMetricsPreview();
+        if ($("autoSimulateToggle").checked) runPlaygroundPrediction(false);
+      });
+      $(id).addEventListener("change", () => {
+        syncSliderLabels();
+        updateLiveMetricsPreview();
+        if ($("autoSimulateToggle").checked) runPlaygroundPrediction(false);
+      });
+    });
+
+    $("runPredictionBtn").addEventListener("click", () => runPlaygroundPrediction(true));
+    $("refreshMatchesBtn").addEventListener("click", syncLiveICCFeed);
+
+    $("openSettingsBtn").addEventListener("click", () => {
+      $("geminiKeyInput").value = state.geminiKey;
+      $("cricApiKeyInput").value = state.cricApiKey;
+      $("settingsModal").classList.add("open");
+    });
+    $("closeSettingsBtn").addEventListener("click", () => $("settingsModal").classList.remove("open"));
+    $("saveSettingsBtn").addEventListener("click", () => {
+      state.geminiKey = $("geminiKeyInput").value.trim();
+      state.cricApiKey = $("cricApiKeyInput").value.trim();
+      localStorage.setItem("cricpredict_gemini_key", state.geminiKey);
+      localStorage.setItem("cricpredict_cricapi_key", state.cricApiKey);
+      $("settingsModal").classList.remove("open");
+      updateEnginePill();
+      showToast("API settings saved to browser storage");
+    });
+
+    updateEnginePill();
+    renderMatchesFeed();
+    syncSliderLabels();
+    updateLiveMetricsPreview();
+    runPlaygroundPrediction(false);
+    lookupPlayer("Jasprit Bumrah");
+  </script>
+</body>
+</html>
